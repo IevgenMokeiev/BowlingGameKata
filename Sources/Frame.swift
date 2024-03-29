@@ -30,12 +30,26 @@ final class Frame {
     // MARK: - Private
     
     private var strikeBonus: Int {
-        guard let nextFrame, nextFrame.rolls.count > 1 else { return 0 }
-        return nextFrame.rolls[0].pins + nextFrame.rolls[1].pins
+        if isLastFrame {
+            return (rolls[safe: 1]?.pins ?? 0) + (rolls[safe: 2]?.pins ?? 0)
+        } else {
+            guard let nextFrame else { return 0 }
+            return (nextFrame.rolls[safe: 0]?.pins ?? 0) + (nextFrame.rolls[safe: 1]?.pins ?? 0)
+        }
     }
     
     private var spareBonus: Int {
-        guard let nextFrame, nextFrame.rolls.count > 0 else { return 0 }
-        return nextFrame.rolls[0].pins
+        if isLastFrame {
+            return rolls[safe: 2]?.pins ?? 0
+        } else {
+            guard let nextFrame else { return 0 }
+            return nextFrame.rolls[safe: 0]?.pins ?? 0
+        }
+    }
+}
+
+extension Collection {
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }
