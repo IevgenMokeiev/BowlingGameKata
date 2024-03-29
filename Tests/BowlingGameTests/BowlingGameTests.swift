@@ -17,21 +17,6 @@ class BowlingGameTests: XCTestCase {
         super.tearDown()
     }
     
-    private func rollMany(pins: Int, times: Int) {
-        for _ in 1...times {
-            game.roll(pins)
-        }
-    }
-    
-    private func rollStrike() {
-        game.roll(10)
-    }
-    
-    private func rollSpare() {
-        game.roll(5)
-        game.roll(5)
-    }
-    
     func testGutterGame() {
         rollMany(pins: 0, times: 20)
         XCTAssertEqual(game.score(), 0)
@@ -60,5 +45,22 @@ class BowlingGameTests: XCTestCase {
     func testPerfectGame() {
         rollMany(pins: 10, times: 12)
         XCTAssertEqual(game.score(), 300)
+    }
+    
+    // MARK: - Private
+    
+    private func rollMany(pins: Int, times: Int) {
+        for _ in 1...times {
+            game.roll(pins)
+        }
+    }
+    
+    private func rollStrike() {
+        game.roll(10)
+    }
+    
+    private func rollSpare() {
+        game.roll(5)
+        game.roll(5)
     }
 }

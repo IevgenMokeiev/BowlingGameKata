@@ -15,7 +15,7 @@ final class BowlingGame {
             return
         }
         
-        if lastFrame.rolls.count == 2 {
+        if lastFrame.rolls.count == 2 || lastFrame.isStrike {
             let frame = Frame()
             frame.rolls.append(roll)
             lastFrame.nextFrame = frame
