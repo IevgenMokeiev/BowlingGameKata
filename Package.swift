@@ -2,8 +2,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "BowlingGame",
+    name: "BowlingGameKata",
     platforms: [.macOS(.v12)],
+    products: [
+        .executable(name: "BowlingGame", targets: ["BowlingGame"])
+    ],
     targets: [
         .executableTarget(
             name: "BowlingGame",
@@ -12,6 +15,7 @@ let package = Package(
         ),
         .testTarget(
             name: "BowlingGameTests",
+            dependencies: ["BowlingGame"], 
             path: "Tests",
             resources: []
         ),
