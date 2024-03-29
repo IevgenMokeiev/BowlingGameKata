@@ -21,6 +21,9 @@ final class BowlingGame {
         if currentFrame.rolls.count == 2 || currentFrame.isStrike {
             let newFrame = addNewFrame(roll: roll)
             currentFrame.nextFrame = newFrame
+            if frames.count > 2 {
+                frames[frames.count-3].subsequentFrame = newFrame
+            }
         } else {
             currentFrame.rolls.append(roll)
         }
